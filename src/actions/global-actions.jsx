@@ -60,6 +60,21 @@ export const getCurrentUser = () => async (dispatch, getState) => {
     dispatch(updateCurrentUser(payload))
 }
 
+export const getAssignments = () => async (dispatch, getState) => {
+    const state = getState()
+    const url = `${state.global.baseUrl}/assignments`
+
+    const response = await Requests.getRequest(url)
+    const payload = await response.json()
+    dispatch(updateAssignments(payload))
+
+}
+
+const updateAssignments = value => ({
+    type: 'UPDATE_ASSIGNMENTS',
+    value
+})
+
 const updateCurrentUser = value => ({
     type: 'UPDATE_CURRENT_USER',
     value
